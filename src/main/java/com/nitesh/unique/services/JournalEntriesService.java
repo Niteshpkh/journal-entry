@@ -1,6 +1,7 @@
 package com.nitesh.unique.services;
 
 import com.nitesh.unique.entity.JournalEntry;
+import com.nitesh.unique.entity.UserEntry;
 import com.nitesh.unique.repository.journalEntryRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class JournalEntriesService {
     public void saveEntity(JournalEntry journalEntry){
         JournalEntryRepo.save(journalEntry);
     }
-    public  List <JournalEntry> getAll(){
+    public  List<JournalEntry> getAll(){
        return JournalEntryRepo.findAll();
 
     }

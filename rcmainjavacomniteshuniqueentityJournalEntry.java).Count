@@ -1,0 +1,48 @@
+[1mdiff --git a/src/main/java/com/nitesh/unique/entity/JournalEntry.java b/src/main/java/com/nitesh/unique/entity/JournalEntry.java[m
+[1mindex e6a9a73..d3513fe 100644[m
+[1m--- a/src/main/java/com/nitesh/unique/entity/JournalEntry.java[m
+[1m+++ b/src/main/java/com/nitesh/unique/entity/JournalEntry.java[m
+[36m@@ -8,6 +8,7 @@[m [mimport java.time.LocalDateTime;[m
+ import java.util.Date;[m
+ [m
+ @Document (collection = "journal_entries")[m
+[32m+[m[32m@Data[m
+ public class JournalEntry {[m
+     @Id[m
+     private ObjectId id;[m
+[36m@@ -15,35 +16,4 @@[m [mpublic class JournalEntry {[m
+     private String content;[m
+     private LocalDateTime date;[m
+ [m
+[31m-    public void setId(ObjectId id){[m
+[31m-        this.id =id;[m
+[31m-    }[m
+ [m
+[31m-    public LocalDateTime getDate() {[m
+[31m-        return date;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void setDate(LocalDateTime date) {[m
+[31m-        this.date = date;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void setContent(String content) {[m
+[31m-        this.content = content;[m
+[31m-    }[m
+[31m-[m
+[31m-    public void setTitle(String title) {[m
+[31m-        this.title = title;[m
+[31m-    }[m
+[31m-[m
+[31m-    public String getContent() {[m
+[31m-        return content;[m
+[31m-    }[m
+[31m-[m
+[31m-    public ObjectId getId() {[m
+[31m-        return id;[m
+[31m-    }[m
+[31m-[m
+[31m-    public String getTitle() {[m
+[31m-        return title;[m
+[31m-    }[m
+[31m-}[m
