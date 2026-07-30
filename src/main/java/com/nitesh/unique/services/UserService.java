@@ -29,4 +29,8 @@ public class UserService {
     public  void deleteUserById(@PathVariable ObjectId id){
         userRepo.deleteById(id);
     }
+
+    public UserEntry findByUserName(String username){
+      return  userRepo.findByUserName(username);
+    }
 }
