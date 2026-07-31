@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +20,15 @@ public class JournalEntriesService {
     @Autowired
     private journalEntryRepository JournalEntryRepo;
 
-    public void saveEntity(JournalEntry journalEntry){
-        JournalEntryRepo.save(journalEntry);
+    @Autowired
+    private UserService userService;
+
+    public void saveEntity(JournalEntry journalEntry, String UserName){
+        journalEntry.setDate(LocalDateTime.now());
+        UserEntry user = userService.findByUserName(UserName);
+        JournalEntry saved = JournalEntryRepo.save(journalEntry);
+        user.getJournalEntries().add(saved);
+        userService.saveUser(user);
     }
     public  List<JournalEntry> getAll(){
        return JournalEntryRepo.findAll();

@@ -6,5 +6,5 @@ import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface UserRepository extends MongoRepository<UserEntry, ObjectId> {
-    UserEntry findByUserName(String username);
+    UserEntry findByUserName(String userName);
 }

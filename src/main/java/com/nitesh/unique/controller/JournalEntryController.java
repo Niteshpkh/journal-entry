@@ -1,9 +1,13 @@
 package com.nitesh.unique.controller;
 
 import com.nitesh.unique.entity.JournalEntry;
+import com.nitesh.unique.entity.UserEntry;
 import com.nitesh.unique.services.JournalEntriesService;
+import com.nitesh.unique.services.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -14,18 +18,29 @@ import java.util.*;
 public class JournalEntryController {
 
     @Autowired
-    public JournalEntriesService journalEntriesService;
+    private JournalEntriesService journalEntriesService;
 
+    @Autowired
+    private UserService userService;
 
-  @GetMapping
-public List<JournalEntry> getAll(){
-    return journalEntriesService.getAll();
+  @GetMapping("/UserName")
+public ResponseEntity<?> getAllJournalEntriesOfUser(@PathVariable String UserName){
+    UserEntry user = userService.findByUserName(UserName);
+      List <JournalEntry> all = user.getJournalEntries();
+      if(all!=null && !all.isEmpty()){
+          return  new ResponseEntity<>(all, HttpStatus.OK);
+
+      }
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 }
-@PostMapping
-public JournalEntry createEntry(@RequestBody JournalEntry myEntry, Locale locale){
-      myEntry.setDate(LocalDateTime.now());
-     journalEntriesService.saveEntity(myEntry);
-     return myEntry;
+
+
+@PostMapping("{UserName}")
+public JournalEntry createEntry(@RequestBody JournalEntry journalEntry, @PathVariable String UserName){
+
+      journalEntry.setDate(LocalDateTime.now());
+     journalEntriesService.saveEntity(journalEntry, UserName);
+     return journalEntry;
 }
 @GetMapping("/id/{myId}")
 public Optional<JournalEntry> getJournalEntryById(@PathVariable ObjectId myId){

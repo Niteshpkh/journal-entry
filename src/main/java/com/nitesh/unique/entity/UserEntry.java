@@ -19,7 +19,7 @@ public class UserEntry
     private ObjectId id;
     @Indexed (unique = true)
     @NonNull
-    private String UserName;
+    private String userName;
     @NonNull
     private String password;
 
