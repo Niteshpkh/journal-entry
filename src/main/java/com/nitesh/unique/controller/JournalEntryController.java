@@ -35,11 +35,11 @@ public ResponseEntity<?> getAllJournalEntriesOfUser(@PathVariable String UserNam
 }
 
 
-@PostMapping("{UserName}")
-public JournalEntry createEntry(@RequestBody JournalEntry journalEntry, @PathVariable String UserName){
+@PostMapping("{userName}")
+public JournalEntry createEntry(@RequestBody JournalEntry journalEntry, @PathVariable String userName){
 
       journalEntry.setDate(LocalDateTime.now());
-     journalEntriesService.saveEntity(journalEntry, UserName);
+     journalEntriesService.saveEntity(journalEntry, userName);
      return journalEntry;
 }
 @GetMapping("/id/{myId}")
@@ -47,8 +47,8 @@ public Optional<JournalEntry> getJournalEntryById(@PathVariable ObjectId myId){
       return Optional.ofNullable(journalEntriesService.findById(myId).orElse(null));
 }
 @DeleteMapping("/id/{myId}")
-public boolean deleteDataById(@PathVariable ObjectId myId){
-       journalEntriesService.deleteById(myId);
+public boolean deleteDataById(@PathVariable ObjectId myId, @PathVariable String userName){
+       journalEntriesService.deleteById(myId, userName);
        return true;
 }
 @PutMapping("/id/{id}")

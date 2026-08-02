@@ -23,9 +23,9 @@ public class JournalEntriesService {
     @Autowired
     private UserService userService;
 
-    public void saveEntity(JournalEntry journalEntry, String UserName){
+    public void saveEntity(JournalEntry journalEntry, String userName){
         journalEntry.setDate(LocalDateTime.now());
-        UserEntry user = userService.findByUserName(UserName);
+        UserEntry user = userService.findByUserName(userName);
         JournalEntry saved = JournalEntryRepo.save(journalEntry);
         user.getJournalEntries().add(saved);
         userService.saveUser(user);
@@ -38,7 +38,10 @@ public class JournalEntriesService {
         return JournalEntryRepo.findById(id);
 
     }
-    public boolean deleteById(ObjectId id){
+    public boolean deleteById(ObjectId id, String userName){
+        UserEntry user = userService.findByUserName(userName);
+        user.getJournalEntries().removeIf(x->x.getId().equals(id));
+        userService.saveUser(user);
        JournalEntryRepo.deleteById(id);
         return true;
     }
