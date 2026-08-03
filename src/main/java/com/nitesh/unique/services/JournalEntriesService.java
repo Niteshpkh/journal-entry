@@ -45,12 +45,8 @@ public class JournalEntriesService {
        JournalEntryRepo.deleteById(id);
         return true;
     }
-    public void updateData(@PathVariable ObjectId id , @RequestBody JournalEntry newEntry){
-        Optional<JournalEntry> journalEntry = JournalEntryRepo.findById(id);
-        if(journalEntry != null){
-
-        }
-
+    public void saveEntry(JournalEntry journalEntry){
+        JournalEntryRepo.save(journalEntry);
     }
 
 }
