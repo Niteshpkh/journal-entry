@@ -3,9 +3,10 @@ import com.nitesh.unique.entity.UserEntry;
 import com.nitesh.unique.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public void saveUser(UserEntry user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(List.of("USER"));
         userRepo.save(user);
     }
 
@@ -23,10 +29,10 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public Optional<UserEntry> findUserById(@PathVariable ObjectId id){
+    public Optional<UserEntry> findUserById( ObjectId id){
        return userRepo.findById(id);
     }
-    public  void deleteUserById(@PathVariable ObjectId id){
+    public  void deleteUserById( ObjectId id){
         userRepo.deleteById(id);
     }
 
