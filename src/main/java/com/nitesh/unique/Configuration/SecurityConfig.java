@@ -27,6 +27,7 @@ public class SecurityConfig {
                     .authorizeHttpRequests(auth-> auth
                             .requestMatchers("/journal").permitAll()
                             .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                            .requestMatchers("/user" , "/user/**").authenticated()
                             .requestMatchers("/admin").hasRole("ADMIN")
                             .anyRequest().authenticated()
                     )
