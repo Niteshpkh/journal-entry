@@ -7,8 +7,6 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,7 +28,7 @@ public class JournalEntriesService {
             UserEntry user = userService.findByUserName(userName);
             JournalEntry saved = JournalEntryRepo.save(journalEntry);
             user.getJournalEntries().add(saved);
-            userService.saveUser(user);
+            userService.saveNewUser(user);
     }
     public  List<JournalEntry> getAll(){
        return JournalEntryRepo.findAll();
@@ -44,7 +42,7 @@ public class JournalEntriesService {
         try {
             UserEntry user = userService.findByUserName(userName);
             user.getJournalEntries().removeIf(x -> x.getId().equals(id));
-            userService.saveUser(user);
+            userService.saveNewUser(user);
             JournalEntryRepo.deleteById(id);
             return true;
         } catch (Exception e) {
@@ -55,6 +53,9 @@ public class JournalEntriesService {
 
     public void saveEntry(JournalEntry journalEntry){
         JournalEntryRepo.save(journalEntry);
+    }
+    public List<JournalEntry> findByUserName(String UserName){
+      return userService.findByUserName(UserName).getJournalEntries();
     }
 
 }

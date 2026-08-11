@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +18,13 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void saveUser(UserEntry user){
+    public void saveNewUser(UserEntry user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(List.of("USER"));
+        userRepo.save(user);
+    }
+
+    public void saveUser(UserEntry user){
         userRepo.save(user);
     }
 
@@ -36,7 +39,7 @@ public class UserService {
         userRepo.deleteById(id);
     }
 
-    public UserEntry findByUserName(String username){
-      return  userRepo.findByUserName(username);
+    public UserEntry findByUserName(String userName){
+      return  userRepo.findByUserName(userName);
     }
 }

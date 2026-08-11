@@ -1,4 +1,5 @@
 package com.nitesh.unique.Configuration;
+import com.nitesh.unique.services.UserDetailServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailServiceImplementation userDetailServiceImplementation;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
@@ -37,7 +38,7 @@ public class SecurityConfig {
 
    @Bean
    public AuthenticationProvider authenticationProvider(){
-       DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+       DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailServiceImplementation);
        provider.setPasswordEncoder(passwordEncoder());
        return provider;
    }
