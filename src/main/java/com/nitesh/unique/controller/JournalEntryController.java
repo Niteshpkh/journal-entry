@@ -41,7 +41,7 @@ public class JournalEntryController {
 
 
     @PostMapping
-    public JournalEntry createEntry(@RequestBody JournalEntry journalEntry ) {
+    public JournalEntry saveEntry(@RequestBody JournalEntry journalEntry ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         journalEntry.setDate(LocalDateTime.now());

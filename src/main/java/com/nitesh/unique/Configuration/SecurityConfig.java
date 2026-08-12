@@ -26,9 +26,8 @@ public class SecurityConfig {
             http
                     .csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(auth-> auth
-                            .requestMatchers("/journal").permitAll()
                             .requestMatchers(HttpMethod.POST, "/user").permitAll()
-                            .requestMatchers("/user" , "/user/**").authenticated()
+                            .requestMatchers("/journal", "/journal/**").authenticated()
                             .requestMatchers("/admin").hasRole("ADMIN")
                             .anyRequest().authenticated()
                     )
@@ -40,6 +39,7 @@ public class SecurityConfig {
    public AuthenticationProvider authenticationProvider(){
        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailServiceImplementation);
        provider.setPasswordEncoder(passwordEncoder());
+
        return provider;
    }
 
