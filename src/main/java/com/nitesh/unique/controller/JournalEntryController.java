@@ -56,7 +56,7 @@ public class JournalEntryController {
         UserEntry user= userService.findByUserName(userName);
        List <JournalEntry> collect = user.getJournalEntries().stream().filter(x-> x.getId().equals(myId)).collect(Collectors.toList());
         if (!collect.isEmpty()){
-           Optional <JournalEntry> journalEntry = journalEntriesService.findById(myId);
+          return new ResponseEntity<>(collect.get(0), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
