@@ -38,17 +38,21 @@ public class JournalEntriesService {
         return JournalEntryRepo.findById(id);
 
     }
+    @Transactional
     public boolean deleteById(ObjectId id, String userName) {
+        boolean removed = false;
         try {
             UserEntry user = userService.findByUserName(userName);
-            user.getJournalEntries().removeIf(x -> x.getId().equals(id));
-            userService.saveNewUser(user);
-            JournalEntryRepo.deleteById(id);
+            removed =  user.getJournalEntries().removeIf(x -> x.getId().equals(id));
+            if(removed){
+                userService.saveNewUser(user);
+                JournalEntryRepo.deleteById(id);
+            }
             return true;
         } catch (Exception e) {
             System.out.println(String.valueOf(e));
         }
-        return false;
+        return removed;
     }
 
     public void saveEntry(JournalEntry journalEntry){
