@@ -1,5 +1,6 @@
 package com.nitesh.unique.entity;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -15,6 +16,7 @@ import java.util.List;
 @Document (collection = "users")
 @Data
 @NoArgsConstructor
+
 public class UserEntry
 {
     @Id
