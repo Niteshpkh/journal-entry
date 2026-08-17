@@ -1,10 +1,4 @@
 spring:
-  mongodb:
-    uri: mongodb+srv://niteshpokhrel84_db_user:AbO57gnDNmXPk828@cluster0.gbyqe3x.mongodb.net/?appName=Cluster0
-    database: journal
-    auto_index-creation : true
-
-    server:
-      port:2003
-    servlet:
-      context-path: /journal
+  profiles:
+    active:
+      - dev

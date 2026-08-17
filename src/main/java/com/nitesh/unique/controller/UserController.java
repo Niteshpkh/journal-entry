@@ -1,5 +1,4 @@
 package com.nitesh.unique.controller;
-
 import com.nitesh.unique.entity.UserEntry;
 import com.nitesh.unique.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
