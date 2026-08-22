@@ -19,6 +19,8 @@
     <description>Student Management System</description>
 
     <properties>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.projectKey>Student</sonar.projectKey>
         <java.version>17</java.version>
     </properties>
 
@@ -94,6 +96,7 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
+
             </plugin>
 
             <!-- Spring Boot -->
@@ -101,7 +104,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>5.5.0.6356</version>
+                    </plugin>
         </plugins>
     </build>
 

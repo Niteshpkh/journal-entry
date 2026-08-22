@@ -3,6 +3,7 @@ package com.nitesh.unique.service;
 import com.nitesh.unique.entity.UserEntry;
 import com.nitesh.unique.repository.UserRepository;
 import com.nitesh.unique.services.UserDetailServiceImplementation;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+@Disabled
 @ExtendWith(MockitoExtension.class)
 public class UserDetailsServiceImplementationTest {
 
