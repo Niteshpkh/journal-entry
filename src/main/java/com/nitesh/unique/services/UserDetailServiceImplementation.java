@@ -17,10 +17,11 @@ public class UserDetailServiceImplementation implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        System.out.println("USERNAME FROM BASIC AUTH: " + userName);
+        System.out.println("USERNAME FROM Login: " + userName);
         UserEntry user =  userRepo.findByUserName(userName);
         if(user!=null) {
             System.out.println("USER FOUND IN DATABASE: " + user.getUserName());
+            System.out.println("PASSWORD FROM DATABASE: " + user.getPassword());
 
            return User.builder()
                     .username(user.getUserName())
@@ -28,7 +29,7 @@ public class UserDetailServiceImplementation implements UserDetailsService {
                     .roles(user.getRoles().toArray(new String[0]))
                     .build();
         }
-        throw new UsernameNotFoundException("Username not found with username" +userName);
+        throw new UsernameNotFoundException("Username not found with username" + userName);
 
 
     }

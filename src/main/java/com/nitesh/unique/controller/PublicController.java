@@ -21,7 +21,7 @@ public class PublicController {
     private UserService userService;
 
     @Autowired
-   private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -30,9 +30,10 @@ public class PublicController {
     private JwtUtils jwtUtils;
 
     @PostMapping("/sign_up")
-    public void createUser(@RequestBody UserEntry users){
+    public void createUser(@RequestBody UserEntry users) {
         userService.saveNewUser(users);
     }
+
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserEntry user) {
         try {
@@ -41,10 +42,11 @@ public class PublicController {
             UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUserName());
             String jwt = jwtUtils.generateToken(userDetails.getUsername());
             return new ResponseEntity<>(jwt, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Incorrect pw", HttpStatus.BAD_REQUEST);
-
         }
+catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
 
     }
 }

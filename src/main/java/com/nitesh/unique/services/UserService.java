@@ -25,6 +25,7 @@ public class UserService {
 
     public void saveNewUser(UserEntry user) {
         try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles(List.of("USER"));
             userRepo.save(user);
         }
